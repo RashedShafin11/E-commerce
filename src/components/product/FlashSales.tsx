@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Timer, ArrowRight } from 'lucide-react';
 import ProductCard from './ProductCard';
-import { PRODUCTS } from '../data';
+import { PRODUCTS } from '../../data';
 
 const FlashSales: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState(3600 * 12); // 12 hours in seconds

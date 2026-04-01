@@ -1,14 +1,18 @@
 import React from 'react';
 import { Star, ShoppingCart } from 'lucide-react';
-import { Product } from '../types';
+import { Link } from 'react-router-dom';
+import { Product } from '../../types';
+import { useCart } from '../../context/CartContext';
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const { addToCart } = useCart();
+
   return (
-    <div className="bg-white border border-grey-100 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all group cursor-pointer relative">
+    <div className="bg-white border border-grey-100 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all group relative flex flex-col h-full">
       {/* Badge for Flash Sale */}
       {product.isFlashSale && (
         <span className="absolute top-2 left-2 bg-orange-500 text-white text-[10px] font-bold px-2 py-1 rounded-full z-10">
@@ -16,27 +20,29 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </span>
       )}
 
-      {/* Product Image */}
-      <div className="h-48 overflow-hidden relative">
+      {/* Product Image - Wrapped in Link */}
+      <Link to={`/product/${product.id}`} className="block h-48 overflow-hidden relative">
         <img
           src={product.image}
           alt={product.title}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-navy-900/0 group-hover:bg-navy-900/10 transition-all"></div>
-      </div>
+      </Link>
 
       {/* Product Info */}
-      <div className="p-4 flex flex-col gap-2">
-        <h3 className="text-sm font-semibold text-navy-900 line-clamp-2 h-10">
-          {product.title}
-        </h3>
+      <div className="p-4 flex flex-col flex-1 gap-2">
+        <Link to={`/product/${product.id}`} className="hover:text-orange-500 transition-colors">
+          <h3 className="text-sm font-semibold text-navy-900 line-clamp-2 h-10">
+            {product.title}
+          </h3>
+        </Link>
         
         {/* Rating */}
         <div className="flex items-center gap-1 text-orange-500">
           <Star size={14} fill="currentColor" />
           <span className="text-xs font-bold">{product.rating}</span>
-          <span className="text-grey-200 text-xs font-normal">(124)</span>
+          <span className="text-grey-200 text-xs font-normal">({product.reviews || 0})</span>
         </div>
 
         {/* Pricing */}
@@ -46,7 +52,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
 
         {/* Add to Cart Button */}
-        <button className="mt-2 w-full bg-navy-900 text-white py-2 rounded-lg text-sm font-semibold flex items-center justify-center gap-2 hover:bg-orange-500 transition-colors shadow-sm">
+        <button 
+          onClick={(e) => {
+            e.preventDefault();
+            addToCart(product);
+          }}
+          className="mt-auto w-full bg-navy-900 text-white py-2 rounded-lg text-sm font-semibold flex items-center justify-center gap-2 hover:bg-orange-500 transition-colors shadow-sm active:scale-95"
+        >
           <ShoppingCart size={16} />
           Add to Cart
         </button>

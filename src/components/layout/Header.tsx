@@ -1,19 +1,23 @@
 import React from 'react';
 import { Search, ShoppingCart, User, Menu } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useCart } from '../../context/CartContext';
 
 const Header: React.FC = () => {
+  const { totalItems } = useCart();
+
   return (
     <header className="bg-navy-900 text-white sticky top-0 z-50">
       <div className="container mx-auto px-4">
         {/* Top Header */}
         <div className="flex items-center justify-between h-20 gap-8">
           {/* Logo */}
-          <div className="flex items-center gap-2 cursor-pointer">
-            <div className="bg-orange-500 p-2 rounded-lg">
+          <Link to="/" className="flex items-center gap-2 cursor-pointer group">
+            <div className="bg-orange-500 p-2 rounded-lg group-hover:scale-110 transition-transform">
               <ShoppingCart size={24} className="text-white" />
             </div>
             <span className="text-2xl font-bold tracking-tight">NexStore</span>
-          </div>
+          </Link>
 
           {/* Search Bar */}
           <div className="flex-1 max-w-2xl relative group">
@@ -39,9 +43,11 @@ const Header: React.FC = () => {
             
             <div className="relative cursor-pointer hover:text-orange-500 transition-colors">
               <ShoppingCart size={24} />
-              <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-navy-900">
-                0
-              </span>
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-navy-900 animate-in fade-in zoom-in duration-300">
+                  {totalItems}
+                </span>
+              )}
             </div>
           </div>
         </div>
@@ -54,11 +60,11 @@ const Header: React.FC = () => {
             <Menu size={16} />
             Categories
           </button>
-          <a href="#" className="hover:text-orange-500 transition-colors">Flash Sales</a>
-          <a href="#" className="hover:text-orange-500 transition-colors">Best Sellers</a>
-          <a href="#" className="hover:text-orange-500 transition-colors">New Arrivals</a>
-          <a href="#" className="hover:text-orange-500 transition-colors">Gift Cards</a>
-          <a href="#" className="hover:text-orange-500 transition-colors">Customer Service</a>
+          <Link to="/" className="hover:text-orange-500 transition-colors">Flash Sales</Link>
+          <Link to="/" className="hover:text-orange-500 transition-colors">Best Sellers</Link>
+          <Link to="/" className="hover:text-orange-500 transition-colors">New Arrivals</Link>
+          <Link to="/" className="hover:text-orange-500 transition-colors">Gift Cards</Link>
+          <Link to="/" className="hover:text-orange-500 transition-colors">Customer Service</Link>
         </div>
       </div>
     </header>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BRANDS } from '../data';
+import { BRANDS } from '../../data';
 
 const FeaturedBrands: React.FC = () => {
   return (
