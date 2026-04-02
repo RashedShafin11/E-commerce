@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import Sidebar from '../components/layout/Sidebar';
 import ProductCard from '../components/product/ProductCard';
 import { PRODUCTS } from '../data';
 import { ChevronRight, Home, Search } from 'lucide-react';
@@ -25,11 +24,7 @@ const CategoryPage: React.FC = () => {
         <span className="text-navy-900 font-semibold">{decodedCategory}</span>
       </nav>
 
-      <div className="flex flex-col lg:flex-row gap-8">
-        <div className="hidden lg:block shrink-0">
-          <Sidebar />
-        </div>
-
+      <div className="flex flex-col gap-8">
         <div className="flex-1">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 md:mb-8 border-b border-grey-100 pb-4 gap-4">
             <div>
@@ -49,7 +44,7 @@ const CategoryPage: React.FC = () => {
           </div>
 
           {filteredProducts.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
               {filteredProducts.map(product => (
                 <ProductCard key={product.id} product={product} />
               ))}
@@ -63,7 +58,7 @@ const CategoryPage: React.FC = () => {
               <p className="text-grey-200 text-sm max-w-md mx-auto mb-8">
                 We couldn't find any products in this category. Try checking another category or head back to home.
               </p>
-              <Link to="/" className="inline-block bg-navy-900 text-white px-8 py-3 rounded-full font-bold hover:bg-orange-500 transition-all shadow-lg text-sm">
+              <Link to="/" className="inline-block bg-navy-900 text-white px-8 py-3 rounded-full font-bold hover:bg-orange-500 transition-all shadow-lg text-sm uppercase tracking-widest">
                 Back to Home
               </Link>
             </div>

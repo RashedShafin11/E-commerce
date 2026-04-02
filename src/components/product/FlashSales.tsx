@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Timer, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import { PRODUCTS } from '../../data';
 
@@ -27,21 +28,24 @@ const FlashSales: React.FC = () => {
       {/* Section Header */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6 md:mb-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
-          <h2 className="text-xl md:text-2xl font-bold text-navy-900 border-l-4 border-orange-500 pl-4">Flash Sales</h2>
-          <div className="flex items-center gap-3 text-orange-500">
+          <h2 className="text-xl md:text-2xl font-bold text-navy-900 border-l-4 border-orange-500 pl-4 uppercase tracking-tight">Flash Sales</h2>
+          <div className="flex items-center gap-3 text-[#F97316]">
             <Timer size={20} className="md:size-6" />
             <div className="flex gap-1.5 md:gap-2">
-              <span className="bg-orange-500 text-white px-1.5 md:px-2 py-0.5 md:py-1 rounded text-xs md:text-sm font-bold">{h.toString().padStart(2, '0')}</span>
-              <span className="font-bold">:</span>
-              <span className="bg-orange-500 text-white px-1.5 md:px-2 py-0.5 md:py-1 rounded text-xs md:text-sm font-bold">{m.toString().padStart(2, '0')}</span>
-              <span className="font-bold">:</span>
-              <span className="bg-orange-500 text-white px-1.5 md:px-2 py-0.5 md:py-1 rounded text-xs md:text-sm font-bold">{s.toString().padStart(2, '0')}</span>
+              <span className="bg-[#F97316] text-white px-1.5 md:px-2 py-0.5 md:py-1 rounded text-xs md:text-sm font-black">{h.toString().padStart(2, '0')}</span>
+              <span className="font-black text-gray-900">:</span>
+              <span className="bg-[#F97316] text-white px-1.5 md:px-2 py-0.5 md:py-1 rounded text-xs md:text-sm font-black">{m.toString().padStart(2, '0')}</span>
+              <span className="font-black text-gray-900">:</span>
+              <span className="bg-[#F97316] text-white px-1.5 md:px-2 py-0.5 md:py-1 rounded text-xs md:text-sm font-black">{s.toString().padStart(2, '0')}</span>
             </div>
           </div>
         </div>
-        <button className="flex items-center gap-2 text-xs md:text-sm font-bold text-navy-900 hover:text-orange-500 transition-colors">
+        <Link 
+          to="/products" 
+          className="flex items-center gap-2 text-xs md:text-sm font-black text-navy-900 hover:text-[#F97316] transition-all hover:underline underline-offset-4"
+        >
           View All <ArrowRight size={16} />
-        </button>
+        </Link>
       </div>
 
       {/* Product Grid: Responsive columns */}

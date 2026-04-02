@@ -5,8 +5,10 @@ import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import CategoryPage from './pages/CategoryPage';
+import AllProductsPage from './pages/AllProductsPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import LoginPage from './pages/LoginPage';
 import PrivacyPolicy from './pages/legal/PrivacyPolicy';
 import TermsConditions from './pages/legal/TermsConditions';
 import ReturnsRefunds from './pages/legal/ReturnsRefunds';
@@ -16,28 +18,32 @@ import { CartProvider } from './context/CartContext';
 import ScrollToTop from './components/layout/ScrollToTop';
 
 function App() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
     <CartProvider>
       <Router>
         <ScrollToTop />
-        <div className="min-h-screen bg-grey-50 font-sans flex flex-col">
-          <Header onMenuClick={() => setIsMobileMenuOpen(true)} />
+        <div className="min-h-screen bg-gray-50 font-sans flex flex-col overflow-x-hidden">
+          {/* Main Navigation */}
+          <Header onMenuClick={() => setIsDrawerOpen(true)} />
           
+          {/* Global Sliding Category Drawer */}
           <Sidebar 
-            isMobile 
-            isOpen={isMobileMenuOpen} 
-            onClose={() => setIsMobileMenuOpen(false)} 
+            isOpen={isDrawerOpen} 
+            onClose={() => setIsDrawerOpen(false)} 
           />
           
+          {/* Main Content Area */}
           <div className="flex-grow">
             <Routes>
               <Route path="/" element={<HomePage />} />
+              <Route path="/products" element={<AllProductsPage />} />
               <Route path="/product/:productId" element={<ProductDetailsPage />} />
               <Route path="/category/:categoryName" element={<CategoryPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/login" element={<LoginPage />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms" element={<TermsConditions />} />
               <Route path="/returns" element={<ReturnsRefunds />} />

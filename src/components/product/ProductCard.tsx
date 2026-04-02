@@ -12,56 +12,55 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addToCart } = useCart();
 
   return (
-    <div className="bg-white border border-grey-100 rounded-xl md:rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all group relative flex flex-col h-full">
+    <div className="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col h-full group relative">
       {/* Badge for Flash Sale */}
       {product.isFlashSale && (
-        <span className="absolute top-2 left-2 bg-orange-500 text-white text-[8px] md:text-[10px] font-black px-1.5 md:px-2 py-0.5 md:py-1 rounded-full z-10 tracking-widest">
-          FLASH SALE
+        <span className="absolute top-2 left-2 bg-[#F97316] text-white text-[9px] font-black px-2 py-0.5 rounded-full z-10 tracking-widest uppercase">
+          Flash Sale
         </span>
       )}
 
-      {/* Product Image - Wrapped in Link */}
-      <Link to={`/product/${product.id}`} className="block h-36 md:h-48 overflow-hidden relative">
+      {/* Product Image */}
+      <Link to={`/product/${product.id}`} className="block h-40 md:h-48 overflow-hidden relative">
         <img
           src={product.image}
           alt={product.title}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         />
-        <div className="absolute inset-0 bg-navy-900/0 group-hover:bg-navy-900/10 transition-all"></div>
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-all"></div>
       </Link>
 
       {/* Product Info */}
-      <div className="p-3 md:p-4 flex flex-col flex-1 gap-1.5 md:gap-2">
-        <Link to={`/product/${product.id}`} className="hover:text-orange-500 transition-colors">
-          <h3 className="text-xs md:text-sm font-bold text-navy-900 line-clamp-2 min-h-[2.5rem] md:min-h-[3rem]">
+      <div className="p-4 flex flex-col flex-1 gap-2">
+        <Link to={`/product/${product.id}`} className="hover:text-[#F97316] transition-colors">
+          <h3 className="text-sm font-bold text-gray-900 line-clamp-2 min-h-[2.5rem]">
             {product.title}
           </h3>
         </Link>
         
         {/* Rating */}
-        <div className="flex items-center gap-1 text-orange-500">
-          <Star size={12} fill="currentColor" className="md:size-14" />
-          <span className="text-[10px] md:text-xs font-black">{product.rating}</span>
-          <span className="text-grey-200 text-[10px] md:text-xs font-normal">({product.reviews || 0})</span>
+        <div className="flex items-center gap-1 text-[#F97316]">
+          <Star size={14} fill="currentColor" />
+          <span className="text-xs font-black">{product.rating}</span>
+          <span className="text-gray-400 text-xs font-normal">({product.reviews || 0})</span>
         </div>
 
         {/* Pricing */}
-        <div className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-2 mt-auto">
-          <span className="text-base md:text-lg font-black text-navy-900">${product.currentPrice}</span>
-          <span className="text-[10px] md:text-xs text-grey-200 line-through">${product.originalPrice}</span>
+        <div className="flex items-baseline gap-2 mt-auto">
+          <span className="text-lg font-black text-gray-900">${product.currentPrice}</span>
+          <span className="text-xs text-gray-400 line-through">${product.originalPrice}</span>
         </div>
 
-        {/* Add to Cart Button */}
+        {/* Add to Cart Button: Professional Dark Navy Style */}
         <button 
           onClick={(e) => {
             e.preventDefault();
             addToCart(product);
           }}
-          className="mt-2 w-full bg-navy-900 text-white py-2 md:py-2.5 rounded-lg md:rounded-xl text-[10px] md:text-xs font-black flex items-center justify-center gap-1.5 md:gap-2 hover:bg-orange-500 transition-all shadow-md active:scale-95 tracking-widest uppercase"
+          className="mt-2 w-full bg-[#001529] text-white px-3 py-2 rounded-md text-xs font-bold flex items-center justify-center gap-2 hover:bg-slate-800 transition-all shadow-md active:scale-95 tracking-widest uppercase"
         >
-          <ShoppingCart size={14} className="md:size-16" />
-          <span className="hidden sm:inline">Add to Cart</span>
-          <span className="sm:hidden">Add</span>
+          <ShoppingCart size={14} />
+          Add to Cart
         </button>
       </div>
     </div>
